@@ -28,9 +28,11 @@
                 </a>
                 <span>all.about.vape23@gmail.com</span>
 
-                <v-btn icon target="_blank">
-                    <v-icon class="fas fa-map-marker-alt"></v-icon>
-                </v-btn>
+                <a href="https://maps.app.goo.gl/Ltr3PWksUrEf6pD37" style="text-decoration: none; color: inherit;">
+                    <v-btn icon target="_blank">
+                        <v-icon class="fas fa-map-marker-alt"></v-icon>
+                    </v-btn>
+                </a>
                 <span>ΧΑΡΑΛΑΜΠΟΥ ΛΙΑΝΔΡΗ, ΑΤΣΙΠΟΠΟΥΛΟ</span>
             </v-col>
 

@@ -14,8 +14,7 @@
         class="mr-4"
       ></v-img>
 
-      <!-- Spacer to push contact info to the right -->
-      <v-spacer></v-spacer>
+      
       <!-- Navigation Links (if any) -->
       <v-btn text>Home</v-btn>
       <v-btn text>Products</v-btn>
