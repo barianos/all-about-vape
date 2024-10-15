@@ -7,6 +7,7 @@
 </template>
 
 <script>
+import '@fortawesome/fontawesome-free/css/all.css';
 import NavBar from './components/NavBar.vue';
 import ContactBanner from './components/ContactBanner.vue';
 
