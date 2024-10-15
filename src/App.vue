@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <ContactBanner />
     <NavBar />
     <router-view></router-view>
   </v-app>
@@ -7,9 +8,11 @@
 
 <script>
 import NavBar from './components/NavBar.vue';
+import ContactBanner from './components/ContactBanner.vue';
 
 export default {
   components: {
+    ContactBanner,
     NavBar,
   },
 };
@@ -28,5 +31,9 @@ export default {
 }
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
+}
+
+v-main {
+  padding-top: 120px; /* Adjust this based on combined height of both banner and nav */
 }
 </style>

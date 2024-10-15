@@ -1,50 +1,66 @@
 <template>
-    <v-app-bar app color="primary" dark>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
+    <v-app-bar
+    app
+    color="primary"
+    dark
+    class="navbar"
+    elevation="4"
+  ><v-row></v-row>
+      <!-- Company Logo -->
+      <v-img
+        src="@/assets/logo.png"
+        alt="Company Logo"
+        max-width="120"
+        class="mr-4"
+      ></v-img>
   
-      <v-img src="../assets/favicon.ico" max-height="50"></v-img>
-
-      <v-toolbar-title> All About Vape</v-toolbar-title>
+      
+      
   
-      <v-spacer></v-spacer>
-  
-      <!-- Desktop links -->
-      <v-btn v-for="link in links" :key="link.name" text>
-        <v-icon left>{{ link.icon }}</v-icon>
-        {{ link.name }}
+      <!-- Phone Number -->
+      <v-btn icon href="tel:2831304224">
+        <v-icon>mdi-phone</v-icon>
+        <v-tooltip bottom>Call Us</v-tooltip>
       </v-btn>
+
+      <span>2831 304224</span>
+      <v-btn icon href="tel:6956201101">
+        <v-icon>mdi-phone</v-icon>
+        <v-tooltip bottom>Call Us</v-tooltip>
+      </v-btn>
+      <span>6956201101</span>
   
-      <!-- Mobile drawer -->
-      <v-navigation-drawer v-model="drawer" app>
-        <v-list>
-          <v-list-item v-for="link in links" :key="link.name" @click="drawer = false">
-            <v-list-item-icon><v-icon>{{ link.icon }}</v-icon></v-list-item-icon>
-            <v-list-item-title>{{ link.name }}</v-list-item-title>
-          </v-list-item>
-        </v-list>
-      </v-navigation-drawer>
+      <!-- Email Address -->
+      <v-btn icon href="mailto:all.about.vape23@gmail.com">
+        <v-icon>mdi-email</v-icon>
+      </v-btn>
+      <span>all.about.vape23@gmail.com</span>
+  
+      <!-- Location -->
+      <v-btn icon href="https://goo.gl/maps/example" target="_blank">
+        <v-icon>mdi-map-marker</v-icon>
+      </v-btn>
+      <span>ΧΑΡΑΛΑΜΠΟΥ ΛΙΑΝΔΡΗ, ΑΤΣΙΠΟΠΟΥΛΟ</span>
+
+      <!-- Spacer to push contact info to the right -->
+      <v-spacer></v-spacer>
+      <!-- Navigation Links (if any) -->
+      <v-btn text>Home</v-btn>
+      <v-btn text>Products</v-btn>
+      <v-btn text>News</v-btn>
+  
     </v-app-bar>
   </template>
   
-  <script>
-  export default {
-    data() {
-      return {
-        drawer: false,
-        links: [
-          { name: 'Home', icon: 'mdi-home', route: '/' },
-          { name: 'Products', icon: 'mdi-package-variant-closed', route: '/products' },
-          { name: 'Blog', icon: 'mdi-pencil', route: '/blog' },
-          { name: 'Contact', icon: 'mdi-email', route: '/contact' },
-        ],
-      };
-    },
-  };
+  <script setup>
   </script>
   
-  <style scoped>
-  .v-btn {
-    margin-right: 10px;
-  }
-  </style>
+  <script setup>
+</script>
+
+<style scoped>
+.navbar {
+  margin-top: 40px; /* Adjust this margin according to the height of the Contact Banner */
+}
+</style>
   
