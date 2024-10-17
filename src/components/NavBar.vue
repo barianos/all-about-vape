@@ -16,8 +16,15 @@
 
       
       <!-- Navigation Links (if any) -->
-      <v-btn text>Home</v-btn>
-      <v-btn text>Products</v-btn>
+      <v-btn to="/" text>
+      Home
+    </v-btn>
+    <v-btn to="/about" text>
+      About
+    </v-btn>
+    <v-btn to="/products" text>
+      Products
+    </v-btn>
       <v-btn text>News</v-btn>
   
     </v-app-bar>
