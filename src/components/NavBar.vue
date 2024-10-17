@@ -24,8 +24,8 @@
     </v-btn>
     <v-btn to="/products" text>
       Products
-    </v-btn>
-      <v-btn text>News</v-btn>
+    </v-btn >
+      <v-btn to="news" text>News</v-btn>
   
     </v-app-bar>
   </template>
