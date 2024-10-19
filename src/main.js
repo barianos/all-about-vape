@@ -13,6 +13,12 @@ const vuetify = createVuetify({
     icons: {
       defaultSet: 'mdi',
     },
+    theme: {
+      defaultTheme: 'light', // Optional, but makes it clear that you're using Vuetify themes
+    },
+    display: {
+      mobileBreakpoint: 'sm', // Optional, sets the mobile breakpoint to 'sm'
+    },
   });
 
 createApp(App).use(vuetify).use(router).mount('#app');
