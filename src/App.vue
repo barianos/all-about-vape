@@ -1,5 +1,6 @@
 <template>
   <v-app>
+    <AgeVerificationModal />
     <ContactBanner />
     <NavBar />
     <router-view></router-view>
@@ -10,9 +11,11 @@
 import '@fortawesome/fontawesome-free/css/all.css';
 import NavBar from './components/NavBar.vue';
 import ContactBanner from './components/ContactBanner.vue';
+import AgeVerificationModal from './components/AgeVerificationModal.vue';
 
 export default {
   components: {
+    AgeVerificationModal,
     ContactBanner,
     NavBar,
   },
