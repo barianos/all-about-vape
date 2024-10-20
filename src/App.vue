@@ -3,7 +3,11 @@
     <AgeVerificationModal />
     <ContactBanner />
     <NavBar />
-    <router-view></router-view>
+    <v-main>
+      <v-container class="router-view-container">
+        <router-view></router-view>
+      </v-container>
+    </v-main>
   </v-app>
 </template>
 
@@ -35,9 +39,5 @@ export default {
 }
 .logo.vue:hover {
   filter: drop-shadow(0 0 2em #42b883aa);
-}
-
-v-main {
-  padding-top: 120px; /* Adjust this based on combined height of both banner and nav */
 }
 </style>
