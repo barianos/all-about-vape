@@ -2,6 +2,7 @@ import { createRouter, createWebHistory } from 'vue-router';
 import HomePage from '@/views/HomePage.vue';
 import AboutPage from '@/views/AboutPage.vue';
 import ProductsPage from '@/views/ProductsPage.vue';
+import FlavorShots from '@/views/FlavorShots.vue';
 import NewsPage from '@/views/NewsPage.vue';
 
 
@@ -25,6 +26,11 @@ const routes = [
     path: '/news',
     name: 'News',
     component: NewsPage
+  },
+  {
+    path: '/flavor-shots',
+    name: 'flavorShots',
+    component: FlavorShots
   }
 
 ];
