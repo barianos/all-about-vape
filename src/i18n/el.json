@@ -1,0 +1,36 @@
+{
+    "categories": {
+      "devices": "Συσκευές",
+      "atomizers": "Ατμοποιητές",
+      "liquids": "Υγρά",
+      "consumables": "Αναλώσιμα",
+      "accessories": "Αξεσουάρ",
+      "otherProducts": "Άλλα Προϊόντα",
+      "disposables": "Disposables",
+      "subcategories": {
+        "pods": "Pods",
+        "kits": "Kits",
+        "mods": "Mods",
+        "factoryAtomizers": "Εργοστασιακοί",
+        "rebuildable": "Επισκευάσιμοι",
+        "coils": "Αντιστάσεις",
+        "capsules": "Κάψουλες",
+        "flavorShots": "Flavor Shots",
+        "readyLiquids10ml": "Έτοιμα υγρά 10ml",
+        "pgVgBases": "Βάσεις PG-VG",
+        "nicotine": "Νικοτίνες",
+        "wire": "Συρμα",
+        "prebuiltCoils": "Έτοιμες Αντιστάσεις",
+        "cotton": "Βαμβάκι",
+        "emptyBottles": "Άδεια Μπουκάλια",
+        "batteries": "Μπαταρίες",
+        "chargers": "Φορτιστές",
+        "tools": "Εργαλεία",
+        "pouches": "Pouches",
+        "shisha": "Shisha",
+        "withNicotine": "Με Νικοτίνη",
+        "withoutNicotine": "Χωρίς Νικοτίνη"
+      }
+    }
+  }
+  
