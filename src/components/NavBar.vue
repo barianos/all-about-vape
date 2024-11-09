@@ -55,9 +55,9 @@ export default {
         {
           name: t("categories.atomizers"),
           subcategories: [
-            { name: t("categories.subcategories.factoryAtomizers"), link: "/atomizers/rda" },
-            { name: t("categories.subcategories.rebuildable"), link: "/atomizers/rta" },
-            { name: t("categories.subcategories.coils"), link: "/atomizers/sub-ohm" },
+            { name: t("categories.subcategories.factoryAtomizers"), link: "/atomizers/factory" },
+            { name: t("categories.subcategories.rebuildable"), link: "/atomizers/rebuildable" },
+            { name: t("categories.subcategories.coils"), link: "/atomizers/coils" },
             { name: t("categories.subcategories.capsules"), link: "/atomizers/capsules" },
           ],
         },
@@ -74,7 +74,7 @@ export default {
           name: t("categories.consumables"),
           subcategories: [
             { name: t("categories.subcategories.wire"), link: "/consumables/wire" },
-            { name: t("categories.subcategories.prebuiltCoils"), link: "/consumables/pre-built-coils" },
+            { name: t("categories.subcategories.coils"), link: "/consumables/coils" },
             { name: t("categories.subcategories.cotton"), link: "/consumables/cotton" },
             { name: t("categories.subcategories.emptyBottles"), link: "/consumables/empty-bottles" },
           ],
