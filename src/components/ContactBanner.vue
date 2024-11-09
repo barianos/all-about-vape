@@ -57,24 +57,22 @@
         </v-col>
   
         <v-col cols="4" class="d-flex align-center justify-end">
-          <v-btn icon href="mailto:all.about.vape23@gmail.com" target="_blank">
-            <v-icon class="fas fa-envelope"></v-icon>
-          </v-btn>
-          <v-btn icon href="https://www.facebook.com/profile.php?id=100094327924435" target="_blank">
-            <v-icon class="fab fa-facebook"></v-icon>
-          </v-btn>
-          <v-btn icon href="https://instagram.com" target="_blank">
-            <v-icon class="fab fa-instagram"></v-icon>
-          </v-btn>
-          <v-btn icon href="https://www.tiktok.com/@all.about.vape7" target="_blank">
-            <v-icon class="fab fa-tiktok"></v-icon>
-          </v-btn>
-        </v-col>
+        <v-btn icon :href="`mailto:${env.EMAIL_ADDRESS}`" target="_blank">
+          <v-icon class="fas fa-envelope"></v-icon>
+        </v-btn>
+        <v-btn icon :href="env.FACEBOOK_URL" target="_blank">
+          <v-icon class="fab fa-facebook"></v-icon>
+        </v-btn>
+        <v-btn icon :href="env.INSTAGRAM_URL" target="_blank">
+          <v-icon class="fab fa-instagram"></v-icon>
+        </v-btn>
+        <v-btn icon :href="env.TIKTOK_URL" target="_blank">
+          <v-icon class="fab fa-tiktok"></v-icon>
+        </v-btn>
+      </v-col>
       </v-row>
     </v-app-bar>
   </template>
-  
-
 
 
   <script>
