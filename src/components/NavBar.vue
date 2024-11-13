@@ -64,8 +64,8 @@ export default {
         {
           name: t("categories.liquids"),
           subcategories: [
-            { name: t("categories.subcategories.flavorShots"), link: "/liquids/shot" },
-            { name: t("categories.subcategories.readyLiquids10ml"), link: "/liquids/ready-10ml" },
+            { name: t("categories.subcategories.flavorShots"), link: "/liquids/flavorshots" },
+            { name: t("categories.subcategories.readyLiquids10ml"), link: "/liquids/ready" },
             { name: t("categories.subcategories.pgVgBases"), link: "/liquids/pg-vg-bases" },
             { name: t("categories.subcategories.nicotine"), link: "/liquids/nicotine" },
           ],
