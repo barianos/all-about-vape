@@ -2,12 +2,11 @@
     <v-container>
       <v-row>
         <v-col
-          v-for="flavor in flavorShots"
+          v-for="flavor in nicotineBase"
           :key="flavor.id"
           cols="12" sm="6" md="4"
         >
           <v-card>
-            <!-- Image block with mouseover effect -->
             <v-img
               :src="hoveredId === flavor.id && flavor.secondary_photo ? flavor.secondary_photo : flavor.primary_photo"
               :alt="flavor.name"
@@ -32,17 +31,17 @@
   export default {
     data() {
       return {
-        flavorShots: [],       
+        nicotineBase: [],       
         hoveredId: null 
       };
     },
     methods: {
-      async fetchFlavorShots() {
-        const { data, error } = await supabase.from('flavor_shots').select('*');
+      async fetchNicotineBase() {
+        const { data, error } = await supabase.from('nicotine_liquids').select('*');
         if (error) {
           console.error('Error fetching flavor shots:', error);
         } else {
-          this.flavorShots = data;
+          this.nicotineBase = data;
         }
       },
       handleMouseOver(id) {
@@ -53,7 +52,7 @@
       }
     },
     mounted() {
-      this.fetchFlavorShots();
+      this.fetchNicotineBase();
     }
   };
   </script>
