@@ -8,6 +8,10 @@ import BaseLiquids from '@/views/ProductPages/BaseLiquids.vue';
 import ReadyLiquids from '@/views/ProductPages/ReadyLiquids.vue';
 import NewsPage from '@/views/NewsPage.vue';
 // import DevicesPage from '@/views/ProductPages/DevicesPage.vue';
+import StarterKitsPage from '@/views/ProductPages/StarterKitsPage.vue';
+import PodsPage from '@/views/ProductPages/PodsPage.vue';
+import ModsPage from '@/views/ProductPages/ModsPage.vue';
+
 
 const routes = [
   {
@@ -30,21 +34,21 @@ const routes = [
   //   name: 'Devices',
   //   component: DevicesPage,
   // },
-  // {
-  //   path: '/devices/pods/',
-  //   name: 'Pods',
-  //   component: PodsPage,
-  // },
-  // {
-  //   path: '/devices/kits',
-  //   name: 'Kits',
-  //   component: KitsPage,
-  // },
-  // {
-  //   path: '/devices/mods/',
-  //   name: 'Mods',
-  //   component: ModsPage,
-  // },
+  {
+    path: '/devices/pods/',
+    name: 'Pods',
+    component: PodsPage,
+  },
+  {
+    path: '/devices/kits',
+    name: 'Kits',
+    component: StarterKitsPage,
+  },
+  {
+    path: '/devices/mods/',
+    name: 'Mods',
+    component: ModsPage,
+  },
   // {
   //   path: '/atomizers/factory',
   //   name: 'Factory Atomizers',
