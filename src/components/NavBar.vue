@@ -56,9 +56,9 @@ export default {
           name: t("categories.atomizers"),
           subcategories: [
             { name: t("categories.subcategories.factoryAtomizers"), link: "/atomizers/factory" },
-            { name: t("categories.subcategories.rebuildable"), link: "/atomizers/rebuildable" },
+            { name: t("categories.subcategories.rebuildable"), link: "/atomizers/rta" },
             { name: t("categories.subcategories.coils"), link: "/atomizers/coils" },
-            { name: t("categories.subcategories.capsules"), link: "/atomizers/capsules" },
+            { name: t("categories.subcategories.capsules"), link: "/atomizers/Cartridges" },
           ],
         },
         {

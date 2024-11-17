@@ -11,6 +11,10 @@ import NewsPage from '@/views/NewsPage.vue';
 import StarterKitsPage from '@/views/ProductPages/StarterKitsPage.vue';
 import PodsPage from '@/views/ProductPages/PodsPage.vue';
 import ModsPage from '@/views/ProductPages/ModsPage.vue';
+import CoilsPage from '@/views/ProductPages/CoilsPage.vue';
+import FactoryVaporizers from '@/views/ProductPages/FactoryVaporizers.vue';
+import PodCartridges from '@/views/ProductPages/PodCartridges.vue';
+import RtaVaporizers from '@/views/ProductPages/RtaVaporizers.vue';
 
 
 const routes = [
@@ -49,26 +53,26 @@ const routes = [
     name: 'Mods',
     component: ModsPage,
   },
-  // {
-  //   path: '/atomizers/factory',
-  //   name: 'Factory Atomizers',
-  //   component: FactoryAtomizersPage,
-  // },
-  // {
-  //   path: '/atomizers/rebuildable',
-  //   name: 'Rebuildable Atomizers',
-  //   component: RebuildableAtomizersPage,
-  // },
-  // {
-  //   path: '/atomizers/coils',
-  //   name: 'Coils',
-  //   component: CoilsPage,
-  // },
-  // {
-  //   path: '/atomizers/capsules',
-  //   name: 'Capsules',
-  //   component: CapsulesPage,
-  // },
+  {
+    path: '/atomizers/factory',
+    name: 'Factory Atomizers',
+    component: FactoryVaporizers,
+  },
+  {
+    path: '/atomizers/rta',
+    name: 'RTA Atomizers',
+    component: RtaVaporizers,
+  },
+  {
+    path: '/atomizers/coils',
+    name: 'Coils',
+    component: CoilsPage,
+  },
+  {
+    path: '/atomizers/Cartridges',
+    name: 'Cartridges',
+    component: PodCartridges,
+  },
   {
     path: '/liquids/flavorshots',
     name: 'Flavor Shots',
