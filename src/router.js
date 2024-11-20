@@ -15,6 +15,17 @@ import CoilsPage from '@/views/ProductPages/CoilsPage.vue';
 import FactoryVaporizers from '@/views/ProductPages/FactoryVaporizers.vue';
 import PodCartridges from '@/views/ProductPages/PodCartridges.vue';
 import RtaVaporizers from '@/views/ProductPages/RtaVaporizers.vue';
+import CottonPage from '@/views/ProductPages/CottonPage.vue';
+import EmptyBottlesPage from '@/views/ProductPages/EmptyBottlesPage.vue';
+import PrebuiltCoils from '@/views/ProductPages/PrebuiltCoils.vue';
+import WiresPage from '@/views/ProductPages/WiresPage.vue';
+import BatteriesPage from '@/views/ProductPages/BatteriesPage.vue';
+import Chargers from '@/views/ProductPages/Chargers.vue';
+import Tools from '@/views/ProductPages/Tools.vue';
+import PouchesPage from '@/views/ProductPages/PouchesPage.vue';
+import ShishaPage from '@/views/ProductPages/ShishaPage.vue';
+import DisposablesNicotine from '@/views/ProductPages/DisposablesNicotine.vue';
+import DisposablesNicotineFree from '@/views/ProductPages/DisposablesNicotineFree.vue';
 
 
 const routes = [
@@ -93,61 +104,61 @@ const routes = [
     name: 'Liquid Nicotine',
     component: NicotineLiquids,
   },
-  // {
-  //   path: '/consumables/wire',
-  //   name: 'Wires',
-  //   component: WiresPage,
-  // },
-  // {
-  //   path: '/consumables/coils',
-  //   name: 'Coils',
-  //   component: CoilsPage,
-  // },
-  // {
-  //   path: '/consumables/cotton',
-  //   name: 'Cotton',
-  //   component: CottonPage,
-  // },
-  // {
-  //   path: '/consumables/empty-bottles',
-  //   name: 'Empty Bottles',
-  //   component: EmptyBottlesPage,
-  // },
-  // {
-  //   path: '/accessories/batteries',
-  //   name: 'Batteries',
-  //   component: BatteriesPage,
-  // },
-  // {
-  //   path: '/accessories/chargers',
-  //   name: 'Chargers',
-  //   component: ChargersPage,
-  // },
-  // {
-  //   path: '/accessories/tools',
-  //   name: 'Tools',
-  //   component: ToolsPage,
-  // },
-  // {
-  //   path: '/other-products/pouches',
-  //   name: 'Pouches',
-  //   component: PouchesPage,
-  // },
-  // {
-  //   path: '/other-products/shisha',
-  //   name: 'Shisha',
-  //   component: ShishaPage,
-  // },
-  // {
-  //   path: '/disposables/with-nicotine',
-  //   name: 'Disposables With Nicotine',
-  //   component: DisposablesNicotinePage,
-  // },
-  // {
-  //   path: '/disposables/without-nicotine',
-  //   name: 'Disposalbes Without Nicotine',
-  //   component: DisposableNoNicotinePage,
-  // },
+  {
+    path: '/consumables/wire',
+    name: 'Wires',
+    component: WiresPage,
+  },
+  {
+    path: '/consumables/coils',
+    name: 'PrebuiltCoils',
+    component: PrebuiltCoils,
+  },
+  {
+    path: '/consumables/cotton',
+    name: 'Cotton',
+    component: CottonPage,
+  },
+  {
+    path: '/consumables/empty-bottles',
+    name: 'Empty Bottles',
+    component: EmptyBottlesPage,
+  },
+  {
+    path: '/accessories/batteries',
+    name: 'Batteries',
+    component: BatteriesPage,
+  },
+  {
+    path: '/accessories/chargers',
+    name: 'Chargers',
+    component: Chargers,
+  },
+  {
+    path: '/accessories/tools',
+    name: 'Tools',
+    component: Tools,
+  },
+  {
+    path: '/other-products/pouches',
+    name: 'Pouches',
+    component: PouchesPage,
+  },
+  {
+    path: '/other-products/shisha',
+    name: 'Shisha',
+    component: ShishaPage,
+  },
+  {
+    path: '/disposables/with-nicotine',
+    name: 'Disposables With Nicotine',
+    component: DisposablesNicotine,
+  },
+  {
+    path: '/disposables/without-nicotine',
+    name: 'Disposalbes Without Nicotine',
+    component: DisposablesNicotineFree,
+  },
   {
     path: '/news',
     name: 'News',
