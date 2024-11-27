@@ -2,7 +2,11 @@
   <v-app-bar app color="secondary" dark class="navbar" elevation="4">
     <img src="@/assets/logocut.png" alt="Company Logo" class="logo-img" />
 
-    <v-btn v-for="(category, index) in translatedCategories" :key="index">
+    <v-btn
+      v-for="(category, index) in translatedCategories"
+      :key="index"
+      class="category-button"
+    >
       {{ category.name }}
 
       <v-menu activator="parent">
@@ -10,7 +14,7 @@
           <v-list-item
             v-for="(item, subIndex) in category.subcategories"
             :key="subIndex"
-            :to="item.link"
+            :to="`/${category.slug}/${item.slug}`"
           >
             <v-list-item-title>{{ item.name }}</v-list-item-title>
           </v-list-item>
@@ -44,61 +48,68 @@ export default {
 
     const translatedCategories = computed(() => {
       return [
-      {
+        {
           name: t("categories.devices"),
+          slug: "devices",
           subcategories: [
-            { name: t("categories.subcategories.pods"), link: "/devices/pods" },
-            { name: t("categories.subcategories.kits"), link: "/devices/kits" },
-            { name: t("categories.subcategories.mods"), link: "/devices/mods" },
+            { name: t("categories.subcategories.pods"), slug: "pods" },
+            { name: t("categories.subcategories.kits"), slug: "starter_kit" },
+            { name: t("categories.subcategories.mods"), slug: "mods" },
           ],
         },
         {
           name: t("categories.atomizers"),
+          slug: "atomizers",
           subcategories: [
-            { name: t("categories.subcategories.factoryAtomizers"), link: "/atomizers/factory" },
-            { name: t("categories.subcategories.rebuildable"), link: "/atomizers/rta" },
-            { name: t("categories.subcategories.coils"), link: "/atomizers/coils" },
-            { name: t("categories.subcategories.capsules"), link: "/atomizers/Cartridges" },
+            { name: t("categories.subcategories.factoryAtomizers"), slug: "factory_vaporizers" },
+            { name: t("categories.subcategories.rebuildable"), slug: "rta_vaporizers" },
+            { name: t("categories.subcategories.coils"), slug: "coils_replacements" },
+            { name: t("categories.subcategories.capsules"), slug: "pod_cartridge" },
           ],
         },
         {
           name: t("categories.liquids"),
+          slug: "liquids",
           subcategories: [
-            { name: t("categories.subcategories.flavorShots"), link: "/liquids/flavorshots" },
-            { name: t("categories.subcategories.readyLiquids10ml"), link: "/liquids/ready" },
-            { name: t("categories.subcategories.pgVgBases"), link: "/liquids/pg-vg-bases" },
-            { name: t("categories.subcategories.nicotine"), link: "/liquids/nicotine" },
+            { name: t("categories.subcategories.flavorShots"), slug: "flavor_shots" },
+            { name: t("categories.subcategories.readyLiquids10ml"), slug: "ready_liquids" },
+            { name: t("categories.subcategories.pgVgBases"), slug: "liquid_bases" },
+            { name: t("categories.subcategories.nicotine"), slug: "nicotine_liquids" },
           ],
         },
         {
           name: t("categories.consumables"),
+          slug: "consumables",
           subcategories: [
-            { name: t("categories.subcategories.wire"), link: "/consumables/wire" },
-            { name: t("categories.subcategories.coils"), link: "/consumables/coils" },
-            { name: t("categories.subcategories.cotton"), link: "/consumables/cotton" },
-            { name: t("categories.subcategories.emptyBottles"), link: "/consumables/empty-bottles" },
+            { name: t("categories.subcategories.wire"), slug: "consumables_wire" },
+            { name: t("categories.subcategories.coils"), slug: "prebuilt_resistance" },
+            { name: t("categories.subcategories.cotton"), slug: "consumables_cotton" },
+            { name: t("categories.subcategories.emptyBottles"), slug: "empty_bottles" },
           ],
         },
         {
           name: t("categories.accessories"),
+          slug: "accessories",
           subcategories: [
-            { name: t("categories.subcategories.batteries"), link: "/accessories/batteries" },
-            { name: t("categories.subcategories.chargers"), link: "/accessories/chargers" },
-            { name: t("categories.subcategories.tools"), link: "/accessories/tools" },
+            { name: t("categories.subcategories.batteries"), slug: "batteries" },
+            { name: t("categories.subcategories.chargers"), slug: "battery_chargers" },
+            { name: t("categories.subcategories.tools"), slug: "tools" },
           ],
         },
         {
           name: t("categories.otherProducts"),
+          slug: "other-products",
           subcategories: [
-            { name: t("categories.subcategories.pouches"), link: "/other-products/pouches" },
-            { name: t("categories.subcategories.shisha"), link: "/other-products/shisha" },
+            { name: t("categories.subcategories.pouches"), slug: "pouches" },
+            { name: t("categories.subcategories.shisha"), slug: "shisha" },
           ],
         },
         {
           name: t("categories.disposables"),
+          slug: "disposables",
           subcategories: [
-            { name: t("categories.subcategories.withNicotine"), link: "/disposables/with-nicotine" },
-            { name: t("categories.subcategories.withoutNicotine"), link: "/disposables/without-nicotine" },
+            { name: t("categories.subcategories.withNicotine"), slug: "with-nicotine" },
+            { name: t("categories.subcategories.withoutNicotine"), slug: "without-nicotine" },
           ],
         }
       ];
@@ -122,5 +133,9 @@ export default {
 .flag-icon {
   width: 24px;
   height: 24px;
+}
+
+.category-button {
+  margin-right: 8px;
 }
 </style>
