@@ -1,8 +1,13 @@
-<!-- ProductList.vue -->
 <template>
   <v-container>
-    <v-row>
-      <v-col v-for="item in products" :key="item.id" cols="12" sm="6" md="4" lg="3" xl="3">
+    <v-row v-if="loading">
+      <v-col cols="12">
+        <v-progress-linear indeterminate color="secondary"></v-progress-linear>
+      </v-col>
+    </v-row>
+
+    <v-row v-else-if="products.length > 0">
+      <v-col v-for="item in products" :key="item.id" cols="12" sm="12" md="4" lg="3" xl="3">
         <v-card>
           <v-img :src="hoveredId === item.id && item.secondary_photo ? item.secondary_photo : item.primary_photo"
             :alt="item.name" @mouseover="handleMouseOver(item.id)" @mouseleave="handleMouseLeave" height="200px"
@@ -13,7 +18,14 @@
           <v-card-text>{{ item.description.slice(0, 100) }}...</v-card-text>
         </v-card>
       </v-col>
+    </v-row>
 
+    <v-row v-else>
+      <v-col cols="12">
+        <v-alert type="info" border="left" elevation="2" color="secondary">
+          Δεν υπάρχουν διαθέσιμα προϊόντα για αυτήν την κατηγορία.
+        </v-alert>
+      </v-col>
     </v-row>
   </v-container>
 </template>
@@ -35,12 +47,13 @@ export default {
   data() {
     return {
       products: [],
-      hoveredId: null
+      hoveredId: null,
+      loading: true
     };
   },
   methods: {
     async fetchProducts() {
-      console.log(this.productType)
+      this.loading = true;
       let query = supabase.from(this.productType).select('*');
       if (this.productType === 'with-nicotine' || this.productType === 'without-nicotine') {
         query = supabase.from('disposables').select('*');
@@ -59,6 +72,7 @@ export default {
       } else {
         this.products = data;
       }
+      this.loading = false;
     },
     handleMouseOver(id) {
       this.hoveredId = id;
@@ -72,9 +86,3 @@ export default {
   }
 };
 </script>
-
-<style scoped>
-.primary-photo {
-  transition: 0.3s ease-in-out;
-}
-</style>
