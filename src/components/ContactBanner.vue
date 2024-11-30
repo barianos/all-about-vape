@@ -4,10 +4,10 @@
     <v-row v-if="isMobile" align="center" justify="space-between">
       <v-col cols="6" class="d-flex align-center justify-top">
         <v-btn icon :href="`tel:${env.PHONE_PRIMARY}`">
-          <v-icon>mdi-phone-classic</v-icon>
+          <v-icon  class="fas fa-phone"></v-icon>
         </v-btn>
         <v-btn icon :href="`tel:${env.PHONE_SECONDARY}`">
-          <v-icon class="fas fa-phone"></v-icon>
+          <v-icon class="fas fa-mobile-alt"></v-icon>
         </v-btn>
         <v-btn icon :href="env.MAPS_URL" target="_blank">
           <v-icon class="fas fa-map-marker-alt"></v-icon>
@@ -34,14 +34,14 @@
       <v-col cols="8" class="d-flex align-center">
         <a :href="`tel:${env.PHONE_PRIMARY}`" style="text-decoration: none; color: inherit;">
           <v-btn icon>
-            <v-icon>mdi-phone-classic</v-icon>
+            <v-icon class="fas fa-phone"></v-icon>
           </v-btn>
         </a>
         <span>{{ env.PHONE_PRIMARY }}</span>
 
         <a :href="`tel:${env.PHONE_SECONDARY}`" style="text-decoration: none; color: inherit;">
           <v-btn icon>
-            <v-icon class="fas fa-phone"></v-icon>
+            <v-icon class="fas fa-mobile-alt"></v-icon>
           </v-btn>
         </a>
         <span>{{ env.PHONE_SECONDARY }}</span>
