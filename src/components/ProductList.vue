@@ -8,7 +8,7 @@
 
     <v-row v-else-if="products.length > 0">
       <v-col v-for="item in products" :key="item.id" cols="12" sm="12" md="4" lg="3" xl="3">
-        <v-card>
+        <v-card :to="{ name: 'ProductDetails', params: { productType: item.type, id: item.id } }" class="v-card--link">   
           <v-img :src="hoveredId === item.id && item.secondary_photo ? item.secondary_photo : item.primary_photo"
             :alt="item.name" @mouseover="handleMouseOver(item.id)" @mouseleave="handleMouseLeave" height="200px"
             class="primary-photo"></v-img>

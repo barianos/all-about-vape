@@ -3,12 +3,19 @@ import HomePage from '@/views/HomePage.vue';
 import AboutPage from '@/views/AboutPage.vue';
 import NewsPage from '@/views/NewsPage.vue';
 import GenericProductPage from '@/views/GenericProductPage.vue';
+import ProductDetails from '@/views/ProductDetails.vue';
 
 const routes = [
   {
     path: '/',
     name: 'Home',
     component: HomePage,
+  },
+  {
+    path: '/product/:productType/:id',  // Dynamic route
+    name: 'ProductDetails',
+    component: ProductDetails,
+    props: true, // Pass route params as props
   },
   {
     path: '/about',
