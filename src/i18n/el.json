@@ -1,11 +1,11 @@
 {
     "categories": {
-      "devices": "Συσκευές",
-      "atomizers": "Ατμοποιητές",
-      "liquids": "Υγρά",
-      "consumables": "Αναλώσιμα",
-      "accessories": "Αξεσουάρ",
-      "otherProducts": "Άλλα Προϊόντα",
+      "devices": "ΣΥΣΚΕΥΕΣ",
+      "atomizers": "ΑΤΜΟΠΟΙΗΤΕΣ",
+      "liquids": "ΥΓΡΑ",
+      "consumables": "ΑΝΑΛΩΣΙΜΑ",
+      "accessories": "ΑΞΕΣΟΥΑΡ",
+      "otherProducts": "ΑΛΛΑ ΠΡΟΪΟΝΤΑ",
       "disposables": "Disposables",
       "subcategories": {
         "pods": "Pods",
@@ -19,7 +19,7 @@
         "readyLiquids10ml": "Έτοιμα υγρά 10ml",
         "pgVgBases": "Βάσεις PG-VG",
         "nicotine": "Νικοτίνες",
-        "wire": "Συρμα",
+        "wire": "Σύρμα",
         "prebuiltCoils": "Έτοιμες Αντιστάσεις",
         "cotton": "Βαμβάκι",
         "emptyBottles": "Άδεια Μπουκάλια",
