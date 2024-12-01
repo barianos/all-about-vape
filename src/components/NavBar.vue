@@ -2,10 +2,15 @@
   <v-app-bar app color="secondary" dark class="navbar" elevation="4">
     <img src="@/assets/logocut.png" alt="Company Logo" class="logo-img" />
 
+    <v-btn icon @click="toggleDrawer" v-if="isSmallScreen">
+      <v-icon>fa fa-bars</v-icon>
+    </v-btn>
+
     <v-btn
       v-for="(category, index) in translatedCategories"
       :key="index"
       class="category-button"
+      v-if="!isSmallScreen"
     >
       {{ category.name }}
 
@@ -28,15 +33,56 @@
       <v-icon :icon="currentFlagIcon" class="flag-icon" />
     </v-btn>
   </v-app-bar>
+
+  <v-navigation-drawer 
+    v-model="drawer" 
+    app 
+    temporary
+    :clipped="isSmallScreen"
+    class="d-flex" 
+  >
+    <v-list>
+      <v-list-group
+        v-for="(category, index) in translatedCategories"
+        :key="index"
+        no-action
+        :value="false"
+      >
+      <template v-slot:activator>
+        <v-list-item>
+          <v-list-item-title style="font-weight: bold">{{ category.name }}</v-list-item-title>
+        </v-list-item>
+        <v-list-item
+          v-for="(item, subIndex) in category.subcategories"
+          :key="subIndex"
+          :to="`/${category.slug}/${item.slug}`"
+          
+        >
+          <v-list-item-content>
+            <v-list-item-title class="subcategory-item">{{ item.name }}</v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
+      </template>
+
+
+        <!-- Subcategories -->
+        
+      </v-list-group>
+    </v-list>
+  </v-navigation-drawer>
 </template>
 
 <script>
-import { computed } from 'vue';
+import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
 
 export default {
   setup() {
     const { locale, t } = useI18n();
+    const drawer = ref(false); 
+    const isSmallScreen = computed(() => {
+      return window.innerWidth <= 600;
+    });
 
     const currentFlagIcon = computed(() => {
       return locale.value === 'el' ? 'fi fi-gb' : 'fi fi-gr';
@@ -115,10 +161,17 @@ export default {
       ];
     });
 
+    function toggleDrawer() {
+      drawer.value = !drawer.value;
+    }
+
     return {
       toggleLanguage,
       currentFlagIcon,
       translatedCategories,
+      drawer,
+      isSmallScreen,
+      toggleDrawer
     };
   },
 };
@@ -126,7 +179,7 @@ export default {
 
 <style scoped>
 .logo-img {
-  max-height: 40px;
+  max-height: 60px;
   margin-right: 16px;
 }
 
@@ -138,4 +191,9 @@ export default {
 .category-button {
   margin-right: 8px;
 }
+
+.subcategory-item {
+  padding-left: 54px;
+}
+
 </style>
