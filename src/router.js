@@ -12,10 +12,10 @@ const routes = [
     component: HomePage,
   },
   {
-    path: '/product/:productType/:id',  // Dynamic route
+    path: '/product/:id',
     name: 'ProductDetails',
     component: ProductDetails,
-    props: true, // Pass route params as props
+    props: true,
   },
   {
     path: '/about',

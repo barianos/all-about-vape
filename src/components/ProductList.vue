@@ -8,14 +8,16 @@
 
     <v-row v-else-if="products.length > 0">
       <v-col v-for="item in products" :key="item.id" cols="12" sm="12" md="4" lg="3" xl="3">
-        <v-card :to="{ name: 'ProductDetails', params: { productType: item.type, id: item.id } }" class="v-card--link"> 
+        <v-card :to="{ name: 'ProductDetails', params: { productType: item.type, id: item.id } }" class="v-card--link">
 
           <v-img :lazy-src="item.name" :src="hoveredId === item.id && item.secondary_photo ? item.secondary_photo : item.primary_photo"
             :alt="item.name" @mouseover="handleMouseOver(item.id)" @mouseleave="handleMouseLeave" height="200px"
             class="primary-photo"></v-img>
 
           <v-card-title>{{ item.producer }}</v-card-title>
-          <v-card-text>{{ item.name }}</v-card-text>
+
+          <v-card-text>{{ item.localizedName }}</v-card-text>
+
         </v-card>
       </v-col>
     </v-row>
@@ -56,17 +58,23 @@ export default {
     return {
       products: [],
       hoveredId: null,
-      loading: true
+      loading: true,
+      locale: this.$i18n.locale || 'en',
     };
+  },
+  computed: {
+    localizedName() {
+      return this.item[`name_${this.locale}`] || this.item.name_en;
+    },
+    localizedDescription() {
+      return this.item[`description_${this.locale}`] || this.item.description_en;
+    }
   },
   methods: {
     async fetchProducts() {
       this.loading = true;
-      let query = supabase.from(this.productType).select('*');
-      if (this.productType === 'with-nicotine' || this.productType === 'without-nicotine') {
-        query = supabase.from('disposables').select('*');
-      }
-
+      let query = supabase.from('products').select('*');
+      
       this.filters.forEach(filter => {
         const { column, condition, value } = filter;
         if (column && condition && value !== undefined) {
@@ -79,6 +87,10 @@ export default {
         console.error(`Error fetching products from ${this.productType}:`, error);
       } else {
         this.products = data;
+        this.products.forEach(product => {
+          product.localizedName = product[`name_${this.locale}`] || product.name_en;
+          product.localizedDescription = product[`description_${this.locale}`] || product.description_en;
+        });
       }
       this.loading = false;
     },
@@ -102,7 +114,6 @@ export default {
   transition: transform 0.2s ease, box-shadow 0.2s ease;
 }
 
-
 .v-card {
   opacity: 0;
   transform: translateY(20px);
@@ -115,7 +126,4 @@ export default {
     transform: translateY(0);
   }
 }
-
-
-
 </style>
