@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app color="secondary" dark class="navbar" elevation="4">
+  <v-app-bar app color="black" dark class="navbar" elevation="4">
     <img src="@/assets/logocut.png" alt="Company Logo" class="logo-img" />
 
     <v-btn icon @click="toggleDrawer" v-if="isSmallScreen">
