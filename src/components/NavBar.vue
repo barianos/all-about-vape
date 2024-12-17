@@ -170,8 +170,8 @@ export default {
           name: t("categories.disposables"),
           slug: "disposables",
           subcategories: [
-            { name: t("categories.subcategories.withNicotine"), slug: "with-nicotine" },
-            { name: t("categories.subcategories.withoutNicotine"), slug: "without-nicotine" },
+            { name: t("categories.subcategories.withNicotine"), slug: "disposables-nicotine" },
+            { name: t("categories.subcategories.withoutNicotine"), slug: "disposables-nicotine-free" },
           ],
         }
       ];
