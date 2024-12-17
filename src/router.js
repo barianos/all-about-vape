@@ -4,6 +4,7 @@ import AboutPage from '@/views/AboutPage.vue';
 import NewsPage from '@/views/NewsPage.vue';
 import GenericProductPage from '@/views/GenericProductPage.vue';
 import ProductDetails from '@/views/ProductDetails.vue';
+import ProductList from '@/components/ProductList.vue';
 
 const routes = [
   {
@@ -33,6 +34,12 @@ const routes = [
     component: GenericProductPage,
     props: true,
   },
+  {
+    path: "/products",
+    name: "ProductList",
+    component: ProductList,
+    props: (route) => ({ search: route.query.search }),
+  },  
 ];
 
 const router = createRouter({

@@ -28,6 +28,18 @@
     </v-btn>
 
     <v-spacer></v-spacer>
+    <!-- Search Input -->
+    <v-text-field
+        v-model="searchQuery"
+        :placeholder="$t('search')"
+        dense
+        solo-inverted
+        flat
+        hide-details
+        prepend-inner-icon="mdi-magnify"
+        @input="debouncedSearch"
+        class="navbar-search"
+      ></v-text-field>
 
     <v-btn icon @click="toggleLanguage">
       <v-icon :icon="currentFlagIcon" class="flag-icon" />
@@ -69,12 +81,16 @@
         
       </v-list-group>
     </v-list>
+    
+
   </v-navigation-drawer>
 </template>
 
 <script>
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import debounce from 'lodash/debounce';
+
 
 export default {
   setup() {
@@ -171,8 +187,23 @@ export default {
       translatedCategories,
       drawer,
       isSmallScreen,
-      toggleDrawer
+      toggleDrawer,
+      searchQuery: '',
     };
+  },
+  methods: {
+    performSearch() {
+      if (this.searchQuery.trim()) {
+        this.$router.push({
+          name: "ProductList",
+          query: { search: this.searchQuery.trim() },
+        });
+      }
+    },
+    debouncedSearch: debounce(function () {
+  this.performSearch();
+}, 500),
+
   },
 };
 </script>
@@ -196,4 +227,8 @@ export default {
   padding-left: 54px;
 }
 
+.navbar-search {
+  max-width: 300px; /* Controls search bar width */
+  margin: 0 10px;
+}
 </style>
