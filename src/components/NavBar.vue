@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar app color="secondary" dark class="navbar" elevation="4">
+  <v-app-bar app color="black" dark class="navbar" elevation="4">
     <img src="@/assets/logocut.png" alt="Company Logo" class="logo-img" />
 
     <v-btn icon @click="toggleDrawer" v-if="isSmallScreen">
@@ -28,6 +28,18 @@
     </v-btn>
 
     <v-spacer></v-spacer>
+    <!-- Search Input -->
+    <v-text-field
+        v-model="searchQuery"
+        :placeholder="$t('search')"
+        dense
+        solo-inverted
+        flat
+        hide-details
+        prepend-inner-icon="mdi-magnify"
+        @input="debouncedSearch"
+        class="navbar-search"
+      ></v-text-field>
 
     <v-btn icon @click="toggleLanguage">
       <v-icon :icon="currentFlagIcon" class="flag-icon" />
@@ -69,12 +81,16 @@
         
       </v-list-group>
     </v-list>
+    
+
   </v-navigation-drawer>
 </template>
 
 <script>
 import { computed, ref } from 'vue';
 import { useI18n } from 'vue-i18n';
+import debounce from 'lodash/debounce';
+
 
 export default {
   setup() {
@@ -154,8 +170,8 @@ export default {
           name: t("categories.disposables"),
           slug: "disposables",
           subcategories: [
-            { name: t("categories.subcategories.withNicotine"), slug: "with-nicotine" },
-            { name: t("categories.subcategories.withoutNicotine"), slug: "without-nicotine" },
+            { name: t("categories.subcategories.withNicotine"), slug: "disposables-nicotine" },
+            { name: t("categories.subcategories.withoutNicotine"), slug: "disposables-nicotine-free" },
           ],
         }
       ];
@@ -171,8 +187,23 @@ export default {
       translatedCategories,
       drawer,
       isSmallScreen,
-      toggleDrawer
+      toggleDrawer,
+      searchQuery: '',
     };
+  },
+  methods: {
+    performSearch() {
+      if (this.searchQuery.trim()) {
+        this.$router.push({
+          name: "ProductList",
+          query: { search: this.searchQuery.trim() },
+        });
+      }
+    },
+    debouncedSearch: debounce(function () {
+  this.performSearch();
+}, 500),
+
   },
 };
 </script>
@@ -196,4 +227,8 @@ export default {
   padding-left: 54px;
 }
 
+.navbar-search {
+  max-width: 300px; /* Controls search bar width */
+  margin: 0 10px;
+}
 </style>

@@ -31,6 +31,11 @@
         "withNicotine": "With Nicotine",
         "withoutNicotine": "Without Nicotine"
       }
-    }
+    },
+    "noProductsMessage": "No products available for this category.",
+    "shopAddress" : "XARALAMPOU LIANDRI, ATSIPOPULO",
+    "back": "BACK",
+    "search": "SEARCH",
+    "generalError": "SOMETHING WENT WRONG..."
   }
   

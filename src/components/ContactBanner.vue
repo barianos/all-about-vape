@@ -1,5 +1,5 @@
 <template>
-  <v-app-bar color="primary" dark class="navbar" elevation="2">
+  <v-app-bar color="black" dark class="navbar" elevation="2">
     <!-- Mobile Layout-->
     <v-row v-if="isMobile" align="center" justify="space-between">
       <v-col cols="6" class="d-flex align-center justify-top">
@@ -51,7 +51,7 @@
             <v-icon class="fas fa-map-marker-alt"></v-icon>
           </v-btn>
         </a>
-        <span>{{ env.SHOP_ADDRESS }}</span>
+        <span>{{ t('shopAddress') }}</span>
       </v-col>
 
       <v-col cols="4" class="d-flex align-center justify-end">
@@ -74,9 +74,11 @@
 
 <script>
 import { useDisplay } from 'vuetify';
+import { useI18n } from 'vue-i18n';
 
 export default {
   setup() {
+    const { t } = useI18n();
     const env = {
       EMAIL_ADDRESS: import.meta.env.VITE_EMAIL_ADDRESS,
       SHOP_ADDRESS: import.meta.env.VITE_SHOP_ADDRESS,
@@ -86,12 +88,14 @@ export default {
       FACEBOOK_URL: import.meta.env.VITE_FACEBOOK_URL,
       INSTAGRAM_URL: import.meta.env.VITE_INSTAGRAM_URL,
       TIKTOK_URL: import.meta.env.VITE_TIKTOK_URL,
+      
     };
 
     const { smAndDown } = useDisplay();
     return {
       isMobile: smAndDown,
       env,
+      t
     };
   },
 };
