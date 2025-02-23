@@ -7,31 +7,14 @@
     </v-row>
 
     <v-row v-else-if="products.length > 0">
-      <v-col
-        v-for="item in products"
-        :key="item.id"
-        cols="12"
-        sm="12"
-        md="4"
-        lg="3"
-        xl="3"
-      >
-        <v-card
-          :to="{ name: 'ProductDetails', params: { productType: item.type, id: item.id } }"
-          class="v-card--link"
-        >
-          <v-img
-            :lazy-src="item.name"
+      <v-col v-for="item in products" :key="item.id" cols="12" sm="12" md="4" lg="3" xl="3">
+        <v-card :to="{ name: 'ProductDetails', params: { productType: item.type, id: item.id } }" class="v-card--link">
+          <v-img :lazy-src="item.primary_photo"
             :src="hoveredId === item.id && item.secondary_photo ? item.secondary_photo : item.primary_photo"
-            :alt="item.name"
-            @mouseover="handleMouseOver(item.id)"
-            @mouseleave="handleMouseLeave"
-            height="200px"
-            class="primary-photo"
-          ></v-img>
+            :alt="item.localizedName" @mouseover="handleMouseOver(item.id)" @mouseleave="handleMouseLeave"
+            height="200px" class="primary-photo"></v-img>
 
           <v-card-title>{{ item.producer }}</v-card-title>
-
           <v-card-text>{{ item.localizedName }}</v-card-text>
         </v-card>
       </v-col>
@@ -54,10 +37,7 @@ import { useI18n } from 'vue-i18n';
 export default {
   setup() {
     const { t } = useI18n();
-
-    return {
-      t,
-    };
+    return { t };
   },
   props: {
     productType: {
@@ -81,41 +61,50 @@ export default {
       locale: this.$i18n.locale || 'en',
     };
   },
-  computed: {
-    localizedName() {
-      return this.item[`name_${this.locale}`] || this.item.name_en;
-    },
-    localizedDescription() {
-      return this.item[`description_${this.locale}`] || this.item.description_en;
-    },
-  },
   watch: {
-    filters: "fetchProducts",
-    search: "fetchProducts",
+    filters: {
+      handler() {
+        this.fetchProducts();
+      },
+      deep: true,
+    },
+    search() {
+      this.fetchProducts();
+    },
   },
   methods: {
     async fetchProducts() {
       this.loading = true;
-      let query = supabase.from('products').select('*');
+      const typeId = parseInt(this.productType, 10); // Convert to integer
+      if (isNaN(typeId)) {
+        console.error("productType is not a valid number");
+        this.loading = false;
+        return;
+      }
 
-      this.filters.forEach((filter) => {
-        const { column, condition, value } = filter;
-        if (column && condition && value !== undefined) {
-          query = query[condition](column, value);
+      let query = supabase.from('products').select('*').eq('type_id', typeId);
+
+      this.filters.forEach(filter => {
+        if (filter.value !== null) {
+          if (filter.column === 'type_id' && isNaN(parseInt(filter.value, 10))) {
+            console.log('invalid type_id filter was skipped');
+            return;
+          }
+          if (filter.column === 'vaping_profile' || filter.column === 'producer') {
+            query = query.ilike(filter.column, filter.value);
+          } else {
+            query = query.eq(filter.column, filter.value);
+          }
+
         }
       });
 
-      if (this.search) {
-        query.or(
-          `name_en.ilike.%${this.search}%,name_el.ilike.%${this.search}%,producer.ilike.%${this.search}%,description_en.ilike.%${this.search}%,description_el.ilike.%${this.search}%`
-        );
-      }
-
+      console.log("Filters:", this.filters);
       const { data, error } = await query;
       if (error) {
         console.error(`Error fetching products from ${this.productType}:`, error);
       } else {
-        this.products = data.map((product) => ({
+        this.products = data.map(product => ({
           ...product,
           localizedName: product[`name_${this.locale}`] || product.name_en,
           localizedDescription: product[`description_${this.locale}`] || product.description_en,

@@ -36,6 +36,8 @@
     "shopAddress" : "XARALAMPOU LIANDRI, ATSIPOPULO",
     "back": "BACK",
     "search": "SEARCH",
-    "generalError": "SOMETHING WENT WRONG..."
+    "generalError": "SOMETHING WENT WRONG...",
+    "filterProducts" : "Filters",
+    "filterTitle" : "Filters"
   }
   

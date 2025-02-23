@@ -36,7 +36,9 @@
     "shopAddress" : "ΧΑΡΑΛΑΜΠΟΥ ΛΙΑΝΔΡΗ, ΑΤΣΙΠΟΠΟΥΛΟ",
     "back": "ΕΠΙΣΤΡΟΦΗ",
     "search": "ΑΝΑΖΗΤΗΣΗ",
-    "generalError": "ΚΑΤΙ ΠΗΓΕ ΣΤΡΑΒΑ..."
+    "generalError": "ΚΑΤΙ ΠΗΓΕ ΣΤΡΑΒΑ...",
+    "filterProducts" : "Φίλτρα",
+    "filterTitle" : "Φίλτρα"
     
   }
   
