@@ -11,20 +11,16 @@
                 <v-list-subheader class="filter-title">
                     {{ t(filter) }}
                 </v-list-subheader>
-                
+
                 <div class="filter-options">
                     <div v-for="value in values" :key="value" class="ml-2">
-                        <v-checkbox 
-                            :label="value" 
-                            :value="value"
+                        <v-checkbox :label="value" :value="value"
                             :model-value="selectedFilters[filter] ? selectedFilters[filter].includes(value) : false"
-                            @update:model-value="(checked) => toggleSelection(filter, value, checked)"
-                            dense
-                        >
+                            @update:model-value="(checked) => toggleSelection(filter, value, checked)" dense>
                         </v-checkbox>
                     </div>
                 </div>
-                
+
                 <v-divider class="my-2"></v-divider>
             </div>
         </v-list>
@@ -59,6 +55,19 @@ export default {
             7: ["producer", "volume", "ohm", "material"],
             8: ["producer", "volume", "vaping_profile", "flavor"],
             9: ["producer", "volume", "vaping_profile", "flavor", "nicotine_volume"],
+            10: ['producer', 'volume'],
+            11: ['producer', 'volume', 'vaping_profile', 'nicotine_volume'],
+            12: ['producer', 'ohm', 'length'],
+            13: ['producer', 'ohm'],
+            14: ['producer'],
+            15: ['producer'],
+            16: ['producer', 'amphours', 'ampere', 'volt', 'weight'],
+            17: ['producer'],
+            18: ['producer'],
+            19: ['producer'],
+            20: ['producer'],
+            21: ['producer', 'volume', 'vaping_profile', 'ampere', 'flavor', 'puffs', 'length'],
+            22: ['producer', 'volume', 'vaping_profile', 'ampere', 'flavor', 'puffs', 'length']
         };
 
         const availableFilters = computed(() => filtersByProductTypeId[props.productTypeId] || []);
@@ -108,13 +117,13 @@ export default {
             if (!selectedFilters[filter]) {
                 selectedFilters[filter] = [];
             }
-            
+
             if (checked) {
                 selectedFilters[filter].push(value);
             } else {
                 selectedFilters[filter] = selectedFilters[filter].filter(v => v !== value);
             }
-            
+
             updateFilters();
         }
 
