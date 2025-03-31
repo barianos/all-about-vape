@@ -1,7 +1,9 @@
 <template>
   <div>
-    <ProductFilters v-if="resolvedTypeId" :productTypeId="resolvedTypeId" :productType="productType" @updateFilters="updateFilters" />
-    <ProductList v-if="resolvedTypeId" :key="productType" :productType="resolvedTypeId" :filters="mergedFilters" />
+    <ProductFilters v-if="resolvedTypeId" :productTypeId="resolvedTypeId" :productType="productType"
+      @updateFilters="applyFilters" />
+    <ProductList v-if="resolvedTypeId" :key="productType" :productType="resolvedTypeId.toString()"
+      :filters="mergedFilters" />
     <v-alert v-else type="error" color="red" elevation="2">
       {{ t('generalError') }}
     </v-alert>
@@ -25,9 +27,9 @@ export default {
   },
   data() {
     return {
-      resolvedTypeId: null, 
+      resolvedTypeId: null,
       loading: true,
-      userFilters: [], // Stores user-selected filters
+      userFilters: [],
     };
   },
   computed: {
@@ -39,18 +41,26 @@ export default {
       return [{ column: 'type_id', condition: 'eq', value: this.resolvedTypeId }];
     },
     mergedFilters() {
-      return [...this.defaultFilters, ...this.userFilters]; // Combine type_id filter with user filters
+      return [...this.defaultFilters, ...this.userFilters];
     },
   },
   methods: {
-    updateFilters(newFilters) {
-      this.userFilters = Object.keys(newFilters)
-        .filter(column => newFilters[column] !== null && newFilters[column] !== "")
-        .map(column => ({
-          column,
-          condition: 'eq',
-          value: newFilters[column]
-        }));
+    applyFilters(newFilters) {
+      console.log('Applying filters:', newFilters);
+
+      this.userFilters = [];
+
+      Object.keys(newFilters).forEach(column => {
+        const values = newFilters[column];
+        if (values && values.length > 0) {
+          this.userFilters.push({
+            column,
+            condition: 'in',
+            value: values
+          });
+        }
+      });
+
     },
     async fetchTypeId() {
       this.loading = true;
@@ -72,6 +82,7 @@ export default {
   watch: {
     productType(newSlug, oldSlug) {
       if (newSlug !== oldSlug) {
+        this.userFilters = [];
         this.fetchTypeId();
       }
     },

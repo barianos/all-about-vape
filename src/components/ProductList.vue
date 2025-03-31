@@ -75,7 +75,7 @@ export default {
   methods: {
     async fetchProducts() {
       this.loading = true;
-      const typeId = parseInt(this.productType, 10); // Convert to integer
+      const typeId = parseInt(this.productType, 10);
       if (isNaN(typeId)) {
         console.error("productType is not a valid number");
         this.loading = false;
@@ -84,22 +84,40 @@ export default {
 
       let query = supabase.from('products').select('*').eq('type_id', typeId);
 
+      const filtersByColumn = {};
       this.filters.forEach(filter => {
-        if (filter.value !== null) {
-          if (filter.column === 'type_id' && isNaN(parseInt(filter.value, 10))) {
-            console.log('invalid type_id filter was skipped');
-            return;
-          }
-          if (filter.column === 'vaping_profile' || filter.column === 'producer') {
-            query = query.ilike(filter.column, filter.value);
-          } else {
-            query = query.eq(filter.column, filter.value);
-          }
+        if (!filtersByColumn[filter.column]) {
+          filtersByColumn[filter.column] = [];
+        }
+        filtersByColumn[filter.column].push(filter);
+      });
 
+      Object.entries(filtersByColumn).forEach(([column, filters]) => {
+        if (column === 'type_id') {
+          return;
+        }
+
+       const values = filters.map(f => f.value).flat();
+        
+        if (values.length === 0) {
+          return;
+        } else if (values.length === 1) {
+          const value = values[0];
+          if (column === 'vaping_profile' || column === 'producer') {
+            query = query.ilike(column, value);
+          } else {
+            query = query.eq(column, value);
+          }
+        } else {
+          if (column === 'vaping_profile' || column === 'producer') {
+            const orConditions = values.map(val => `${column}.ilike.${val}`).join(',');
+            query = query.or(orConditions);
+          } else {
+            query = query.in(column, values);
+          }
         }
       });
 
-      console.log("Filters:", this.filters);
       const { data, error } = await query;
       if (error) {
         console.error(`Error fetching products from ${this.productType}:`, error);
