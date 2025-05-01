@@ -16,7 +16,7 @@
               v-show="values && values.length > 0"
               class="filter-panel"
             >
-              <v-expansion-panel-title class="py-2">
+              <v-expansion-panel-title class="py-2 font-weight-bold">
                 {{ t(filter) }}
                 <template v-slot:actions="{ expanded }">
                   <v-badge
