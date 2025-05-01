@@ -1,26 +1,20 @@
 <template>
   <v-app-bar app color="black" dark class="navbar" elevation="4">
-    <img src="@/assets/logocut.png" alt="Company Logo" class="logo-img" />
+    <router-link to="/">
+      <img src="@/assets/logocut.png" alt="Company Logo" class="logo-img" />
+    </router-link>
 
     <v-btn icon @click="toggleDrawer" v-if="isSmallScreen">
       <v-icon>fa fa-bars</v-icon>
     </v-btn>
 
-    <v-btn
-      v-for="(category, index) in translatedCategories"
-      :key="index"
-      class="category-button"
-      v-if="!isSmallScreen"
-    >
+    <v-btn v-for="(category, index) in translatedCategories" :key="index" class="category-button" v-if="!isSmallScreen">
       {{ category.name }}
 
       <v-menu activator="parent">
         <v-list>
-          <v-list-item
-            v-for="(item, subIndex) in category.subcategories"
-            :key="subIndex"
-            :to="`/${category.slug}/${item.slug}`"
-          >
+          <v-list-item v-for="(item, subIndex) in category.subcategories" :key="subIndex"
+            :to="`/${category.slug}/${item.slug}`">
             <v-list-item-title>{{ item.name }}</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -29,59 +23,32 @@
 
     <v-spacer></v-spacer>
     <!-- Search Input -->
-    <v-text-field
-        v-model="searchQuery"
-        :placeholder="$t('search')"
-        dense
-        solo-inverted
-        flat
-        hide-details
-        prepend-inner-icon="mdi-magnify"
-        @input="debouncedSearch"
-        class="navbar-search"
-      ></v-text-field>
+    <v-text-field v-model="searchQuery" :placeholder="$t('search')" dense solo-inverted flat hide-details
+      prepend-inner-icon="mdi-magnify" @input="debouncedSearch" class="navbar-search"></v-text-field>
 
     <v-btn icon @click="toggleLanguage">
       <v-icon :icon="currentFlagIcon" class="flag-icon" />
     </v-btn>
   </v-app-bar>
 
-  <v-navigation-drawer 
-    v-model="drawer" 
-    app 
-    temporary
-    :clipped="isSmallScreen"
-    class="d-flex" 
-  >
+  <v-navigation-drawer v-model="drawer" app temporary :clipped="isSmallScreen" class="d-flex">
     <v-list>
-      <v-list-group
-        v-for="(category, index) in translatedCategories"
-        :key="index"
-        no-action
-        :value="false"
-      >
-      <template v-slot:activator>
-        <v-list-item>
-          <v-list-item-title style="font-weight: bold">{{ category.name }}</v-list-item-title>
-        </v-list-item>
-        <v-list-item
-          v-for="(item, subIndex) in category.subcategories"
-          :key="subIndex"
-          :to="`/${category.slug}/${item.slug}`"
-          
-        >
-          <v-list-item-content>
-            <v-list-item-title class="subcategory-item">{{ item.name }}</v-list-item-title>
-          </v-list-item-content>
-        </v-list-item>
-      </template>
+      <v-list-group v-for="(category, index) in translatedCategories" :key="index" no-action :value="false">
+        <template v-slot:activator>
+          <v-list-item>
+            <v-list-item-title style="font-weight: bold">{{ category.name }}</v-list-item-title>
+          </v-list-item>
+          <v-list-item v-for="(item, subIndex) in category.subcategories" :key="subIndex"
+            :to="`/${category.slug}/${item.slug}`">
+            <v-list-item-content>
+              <v-list-item-title class="subcategory-item">{{ item.name }}</v-list-item-title>
+            </v-list-item-content>
+          </v-list-item>
+        </template>
 
-
-        <!-- Subcategories -->
-        
       </v-list-group>
     </v-list>
-    
+
 
   </v-navigation-drawer>
 </template>
@@ -95,7 +62,7 @@ import debounce from 'lodash/debounce';
 export default {
   setup() {
     const { locale, t } = useI18n();
-    const drawer = ref(false); 
+    const drawer = ref(false);
     const isSmallScreen = computed(() => {
       return window.innerWidth <= 600;
     });
@@ -201,8 +168,8 @@ export default {
       }
     },
     debouncedSearch: debounce(function () {
-  this.performSearch();
-}, 500),
+      this.performSearch();
+    }, 500),
 
   },
 };
@@ -228,7 +195,7 @@ export default {
 }
 
 .navbar-search {
-  max-width: 300px; /* Controls search bar width */
+  max-width: 300px;
   margin: 0 10px;
 }
 </style>
