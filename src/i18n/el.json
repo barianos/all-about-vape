@@ -48,5 +48,8 @@
   "ohm": "Ohm",
   "color": "Χρώμα",
   "vaping_profile": "Προφίλ ατμίσματος",
-  "flavor": "Flavor"
+  "flavor": "Flavor",
+  "clear": "Αφαιρεση",
+  "clear_all": "Αφαιρεση όλων",
+  "active_filters": "Ενεργά φίλτρα"
 }

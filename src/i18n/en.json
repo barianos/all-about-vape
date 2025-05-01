@@ -48,5 +48,8 @@
   "ohm": "Ohm",
   "color": "Color",
   "vaping_profile": "Vaping Profile",
-  "flavor": "Flavor"
+  "flavor": "Flavor",
+  "clear": "Clear",
+  "clear_all": "Clear All",
+  "active_filters": "Active Filters"
 }
