@@ -3,11 +3,15 @@ import vue from '@vitejs/plugin-vue';
 import path from 'path';
 
 export default defineConfig({
-    plugins: [vue()],
-    base: '/',
-    resolve: {
-        alias: {
-          '@': path.resolve(__dirname, './src'), // Set alias for src directory
-        },
-      },
+  plugins: [vue()],
+  base: process.env.NODE_ENV === 'production' ? '/all-about-vape/' : '/',
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+  build: {
+    outDir: 'dist',
+    assetsDir: 'assets',
+  }
 });
