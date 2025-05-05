@@ -1,33 +1,25 @@
 <template>
-  <v-container>
-    <v-row v-if="loading">
-      <v-col cols="12">
-        <v-progress-linear indeterminate color="secondary"></v-progress-linear>
-      </v-col>
-    </v-row>
+      <v-row v-if="products.length > 0">
+        <v-col v-for="item in products" :key="item.id" cols="12" sm="12" md="4" lg="3" xl="3">
+          <v-card :to="{ name: 'ProductDetails', params: { productType: item.type, id: item.id } }" class="v-card--link">
+            <v-img :lazy-src="item.primary_photo"
+              :src="hoveredId === item.id && item.secondary_photo ? item.secondary_photo : item.primary_photo"
+              :alt="item.localizedName" @mouseover="handleMouseOver(item.id)" @mouseleave="handleMouseLeave"
+              height="200px" class="primary-photo"></v-img>
 
-    <v-row v-else-if="products.length > 0">
-      <v-col v-for="item in products" :key="item.id" cols="12" sm="12" md="4" lg="3" xl="3">
-        <v-card :to="{ name: 'ProductDetails', params: { productType: item.type, id: item.id } }" class="v-card--link">
-          <v-img :lazy-src="item.primary_photo"
-            :src="hoveredId === item.id && item.secondary_photo ? item.secondary_photo : item.primary_photo"
-            :alt="item.localizedName" @mouseover="handleMouseOver(item.id)" @mouseleave="handleMouseLeave"
-            height="200px" class="primary-photo"></v-img>
+            <v-card-title>{{ item.producer }}</v-card-title>
+            <v-card-text>{{ item.localizedName }}</v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
 
-          <v-card-title>{{ item.producer }}</v-card-title>
-          <v-card-text>{{ item.localizedName }}</v-card-text>
-        </v-card>
-      </v-col>
-    </v-row>
-
-    <v-row v-else>
-      <v-col cols="12">
-        <v-alert type="info" border="left" elevation="2" color="secondary">
-          {{ t('noProductsMessage') }}
-        </v-alert>
-      </v-col>
-    </v-row>
-  </v-container>
+      <v-row v-else-if="!loading">
+        <v-col cols="12">
+          <v-alert type="info" border="left" elevation="2" color="secondary">
+            {{ t('noProductsMessage') }}
+          </v-alert>
+        </v-col>
+      </v-row>
 </template>
 
 <script>
@@ -35,6 +27,7 @@ import { supabase } from '../supabase';
 import { useI18n } from 'vue-i18n';
 
 export default {
+  emits: ['is-loading'], 
   setup() {
     const { t } = useI18n();
     return { t };
@@ -52,12 +45,14 @@ export default {
       type: String,
       default: null,
     },
+    isParentLoading: Boolean,
+    isInitialLoad: Boolean
   },
   data() {
     return {
       products: [],
       hoveredId: null,
-      loading: true,
+      loading: false,
       locale: this.$i18n.locale || 'en',
     };
   },
@@ -70,6 +65,9 @@ export default {
     },
     search() {
       this.fetchProducts();
+    },
+    loading(newVal) {
+      this.$emit('loading-state', newVal);
     },
   },
   methods: {
@@ -116,6 +114,7 @@ export default {
             query = query.in(column, values);
           }
         }
+        this.loading = false;
       });
 
       const { data, error } = await query;
