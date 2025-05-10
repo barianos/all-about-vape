@@ -1,10 +1,42 @@
 <template>
   <div>
-    <ProductFilters v-if="resolvedTypeId" :productTypeId="resolvedTypeId" :productType="productType"
-      @updateFilters="applyFilters" />
-    <ProductList v-if="resolvedTypeId" :key="productType" :productType="resolvedTypeId.toString()"
-      :filters="mergedFilters" />
-    <v-alert v-else type="error" color="red" elevation="2">
+    <!-- Persistent loading overlay -->
+    <v-overlay 
+      :model-value="initialLoading" 
+      class="align-center justify-center"
+      persistent
+    >
+      <v-progress-circular 
+        indeterminate 
+        color="primary"
+        size="64"
+      ></v-progress-circular>
+    </v-overlay>
+
+    <!-- Main content (always rendered, but filters/list depend on resolvedTypeId) -->
+    <ProductFilters 
+      v-if="resolvedTypeId" 
+      :productTypeId="resolvedTypeId" 
+      :productType="productType"
+      @updateFilters="applyFilters" 
+    />
+    
+    <ProductList 
+      v-if="resolvedTypeId" 
+      :key="`${productType}-${JSON.stringify(mergedFilters)}`" 
+      :productType="resolvedTypeId.toString()"
+      :filters="mergedFilters"
+      @loading-state="handleLoadingState"
+    />
+
+    <!-- Error state -->
+    <v-alert 
+      v-if="!initialLoading && !resolvedTypeId"
+      type="error" 
+      color="red" 
+      elevation="2"
+      class="ma-4"
+    >
       {{ t('generalError') }}
     </v-alert>
   </div>
@@ -25,11 +57,12 @@ export default {
     ProductList,
     ProductFilters,
   },
-  data() {
+  data() { 
     return {
       resolvedTypeId: null,
-      loading: true,
+      initialLoading: true,  // Only for initial type ID loading
       userFilters: [],
+      childLoading: false,
     };
   },
   computed: {
@@ -43,16 +76,16 @@ export default {
     mergedFilters() {
       return [...this.defaultFilters, ...this.userFilters];
     },
+    showNoProducts() {
+        return !this.initialLoading && !this.childLoading && this.resolvedTypeId;
+      }
   },
   methods: {
     applyFilters(newFilters) {
-      console.log('Applying filters:', newFilters);
-
       this.userFilters = [];
-
       Object.keys(newFilters).forEach(column => {
         const values = newFilters[column];
-        if (values && values.length > 0) {
+        if (values?.length > 0) {
           this.userFilters.push({
             column,
             condition: 'in',
@@ -60,35 +93,37 @@ export default {
           });
         }
       });
-
     },
     async fetchTypeId() {
-      this.loading = true;
-      const { data, error } = await supabase
-        .from('product_types')
-        .select('id')
-        .eq('slug', this.productType)
-        .single();
+      this.initialLoading = true;
+      try {
+        const { data, error } = await supabase
+          .from('product_types')
+          .select('id')
+          .eq('slug', this.productType)
+          .single();
 
-      if (error) {
-        console.error(`Error fetching type_id for ${this.productType}:`, error);
-        this.resolvedTypeId = null;
-      } else {
+        if (error) throw error;
         this.resolvedTypeId = data?.id || null;
+      } catch (error) {
+        console.error('Error fetching type_id:', error);
+        this.resolvedTypeId = null;
+      } finally {
+        this.initialLoading = false;
       }
-      this.loading = false;
     },
+    handleLoadingState(isLoading) {
+      this.childLoading = isLoading;
+    },
+    
   },
   watch: {
-    productType(newSlug, oldSlug) {
-      if (newSlug !== oldSlug) {
-        this.userFilters = [];
-        this.fetchTypeId();
-      }
+    productType() {
+      this.fetchTypeId();
     },
   },
-  async mounted() {
-    await this.fetchTypeId();
+  mounted() {
+    this.fetchTypeId();
   },
 };
 </script>
