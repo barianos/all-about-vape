@@ -14,7 +14,7 @@
       <v-menu activator="parent">
         <v-list>
           <v-list-item v-for="(item, subIndex) in category.subcategories" :key="subIndex"
-            :to="`/${category.slug}/${item.slug}`">
+            :to="`/${category.slug}/${item.slug}`" @click="handleMenuItemClick">
             <v-list-item-title>{{ item.name }}</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -159,6 +159,15 @@ export default {
       searchQuery: '',
     };
   },
+  watch: {
+    $route(to, from) {
+      // Only reset search when navigation came from menu click
+      if (this.navigatingFromMenu) {
+        this.searchQuery = '';
+        this.navigatingFromMenu = false; // Reset the flag
+      }
+    }
+  },
   methods: {
     performSearch() {
       if (this.searchQuery) {
@@ -171,6 +180,10 @@ export default {
     debouncedSearch: debounce(function () {
       this.performSearch();
     }, 500),
+    handleMenuItemClick() {
+      this.navigatingFromMenu = true;
+      // The route change will happen via the :to directive
+    }
 
   },
 };
