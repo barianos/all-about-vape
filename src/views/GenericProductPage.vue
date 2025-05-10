@@ -76,6 +76,9 @@ export default {
     mergedFilters() {
       return [...this.defaultFilters, ...this.userFilters];
     },
+    showNoProducts() {
+        return !this.initialLoading && !this.childLoading && this.resolvedTypeId;
+      }
   },
   methods: {
     applyFilters(newFilters) {
@@ -112,11 +115,7 @@ export default {
     handleLoadingState(isLoading) {
       this.childLoading = isLoading;
     },
-    computed: {
-      showNoProducts() {
-        return !this.initialLoading && !this.childLoading && this.resolvedTypeId;
-      }
-    }
+    
   },
   watch: {
     productType() {

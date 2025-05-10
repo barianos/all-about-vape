@@ -8,13 +8,15 @@
       <v-icon>fa fa-bars</v-icon>
     </v-btn>
 
-    <v-btn v-for="(category, index) in translatedCategories" :key="index" class="category-button" v-if="!isSmallScreen">
+    <v-btn v-for="(category, index) in translatedCategories" :key="category.id || 'category-' + index"
+      class="category-button" v-if="!isSmallScreen">
       {{ category.name }}
 
       <v-menu activator="parent">
         <v-list>
-          <v-list-item v-for="(item, subIndex) in category.subcategories" :key="subIndex"
-            :to="`/${category.slug}/${item.slug}`" @click="handleMenuItemClick">
+          <v-list-item v-for="(item, subIndex) in category.subcategories"
+            :key="item.id || `${category.id}-subcategory-${subIndex}`" :to="`/${category.slug}/${item.slug}`"
+            @click="handleMenuItemClick">
             <v-list-item-title>{{ item.name }}</v-list-item-title>
           </v-list-item>
         </v-list>
@@ -32,25 +34,29 @@
   </v-app-bar>
 
   <v-navigation-drawer v-model="drawer" app temporary :clipped="isSmallScreen" class="d-flex">
-    <v-list>
-      <v-list-group v-for="(category, index) in translatedCategories" :key="index" no-action :value="false">
-        <template v-slot:activator>
-          <v-list-item>
-            <v-list-item-title style="font-weight: bold">{{ category.name }}</v-list-item-title>
-          </v-list-item>
-          <v-list-item v-for="(item, subIndex) in category.subcategories" :key="subIndex"
-            :to="`/${category.slug}/${item.slug}`">
-            <v-list-item-content>
-              <v-list-item-title class="subcategory-item">{{ item.name }}</v-list-item-title>
-            </v-list-item-content>
-          </v-list-item>
-        </template>
-
-      </v-list-group>
-    </v-list>
-
-
-  </v-navigation-drawer>
+  <v-list>
+    <v-list-group 
+      v-for="(category, index) in translatedCategories" 
+      :key="index" 
+      no-action 
+      :value="category.name" 
+    >
+      <template v-slot:activator="{ props }">
+        <v-list-item v-bind="props">
+          <v-list-item-title style="font-weight: bold">{{ category.name }}</v-list-item-title>
+        </v-list-item>
+      </template>
+      
+      <v-list-item 
+        v-for="(item, subIndex) in category.subcategories" 
+        :key="subIndex"
+        :to="`/${category.slug}/${item.slug}`"
+      >
+        <v-list-item-title class="subcategory-item">{{ item.name }}</v-list-item-title>
+      </v-list-item>
+    </v-list-group>
+  </v-list>
+</v-navigation-drawer>
 </template>
 
 <script>
