@@ -15,7 +15,7 @@
 
   <v-row v-else-if="!loading">
     <v-col cols="12">
-      <v-alert type="info" border="left" elevation="2" color="secondary">
+      <v-alert type="info" border="top" elevation="2" color="secondary">
         {{ t('noProductsMessage') }}
       </v-alert>
     </v-col>
@@ -35,7 +35,6 @@ export default {
   props: {
     productType: {
       type: String,
-      required: true,
     },
     filters: {
       type: Array,
@@ -68,14 +67,12 @@ export default {
     search() {
       this.fetchProducts();
     },
-    loading(newVal) {
-      this.$emit('loading-state', newVal);
-    },
+    // loading(newVal) {
+    //   this.$emit('loading-state', newVal);
+    // },
   },
   methods: {
     async fetchProducts() {
-      console.log('Fetching Products');
-      console.log(this.search);
       this.loading = true;
       const searchQuery = this.$route.query.search ? this.$route.query.search.trim() : '';
       const typeId = parseInt(this.productType, 10);
@@ -162,7 +159,6 @@ export default {
     },
   },
   mounted() {
-    console.log('mounted');
     this.fetchProducts();
   },
 };
