@@ -139,6 +139,7 @@ export default {
           subcategories: [
             { name: t("categories.subcategories.withNicotine"), slug: "disposables-nicotine" },
             { name: t("categories.subcategories.withoutNicotine"), slug: "disposables-nicotine-free" },
+            { name: t("categories.subcategories.bigPuffs"), slug: "big_puffs" },
           ],
         }
       ];
@@ -160,10 +161,10 @@ export default {
   },
   methods: {
     performSearch() {
-      if (this.searchQuery.trim()) {
+      if (this.searchQuery) {
         this.$router.push({
           name: "ProductList",
-          query: { search: this.searchQuery.trim() },
+          query: { search: this.searchQuery },
         });
       }
     },

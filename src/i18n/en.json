@@ -29,7 +29,8 @@
       "pouches": "Pouches",
       "shisha": "Shisha",
       "withNicotine": "With Nicotine",
-      "withoutNicotine": "Without Nicotine"
+      "withoutNicotine": "Without Nicotine",
+      "bigPuffs": "Big Puffs"
     }
   },
   "noProductsMessage": "No products available for this category.",
