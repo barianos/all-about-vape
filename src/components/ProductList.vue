@@ -54,6 +54,8 @@ export default {
       hoveredId: null,
       loading: false,
       locale: this.$i18n.locale || 'en',
+      sortBy: 'producer',
+      sortAsc: true,  
     };
   },
   watch: {
@@ -80,7 +82,7 @@ export default {
         return;
       }
 
-      let query = supabase.from('products').select('*').eq('type_id', typeId);
+      let query = supabase.from('products').select('*').eq('type_id', typeId).order(this.sortBy, { ascending: this.sortAsc });;
 
       const filtersByColumn = {};
       this.filters.forEach(filter => {
