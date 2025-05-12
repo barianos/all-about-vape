@@ -1,6 +1,9 @@
 
 <template>
   <div class="home-page">
+
+    <!-- Promo Section -->
+    <PromoSlider />
     <!-- Hero Section -->
     <section class="hero">
       <div class="hero-content">
@@ -53,6 +56,14 @@
 </template>
 
 <script>
+import PromoSlider from '@/components/PromoSlider.vue'
+
+export default {
+  name: 'HomePage',
+  components: {
+    PromoSlider
+  }
+}
 </script>
 
 <style scoped>
