@@ -123,18 +123,21 @@ export default {
           return;
         } else if (values.length === 1) {
           const value = values[0];
-          if (column === 'vaping_profile' || column === 'producer') {
-            query = query.ilike(column, value);
-          } else {
-            query = query.eq(column, value);
-          }
+          query = query.ilike(column, value);
+          // if (column === 'vaping_profile' || column === 'producer' || column === 'volume' || column === 'flavor') {
+          //   query = query.ilike(column, value);
+          // } else {
+          //   query = query.eq(column, value);
+          // }
         } else {
-          if (column === 'vaping_profile' || column === 'producer') {
-            const orConditions = values.map(val => `${column}.ilike.${val}`).join(',');
+          const orConditions = values.map(val => `${column}.ilike.${val}`).join(',');
             query = query.or(orConditions);
-          } else {
-            query = query.in(column, values);
-          }
+          // if (column === 'vaping_profile' || column === 'producer' || column === 'volume' || column === 'flavor') {
+          //   const orConditions = values.map(val => `${column}.ilike.${val}`).join(',');
+          //   query = query.or(orConditions);
+          // } else {
+          //   query = query.in(column, values);
+          // }
         }
         this.loading = false;
       });

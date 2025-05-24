@@ -117,6 +117,17 @@ export default {
       return Object.values(selectedFilters).reduce((total, values) => total + (values?.length || 0), 0);
     });
 
+    // Helper function to split and clean values
+    const splitAndCleanValues = (value) => {
+      if (!value || typeof value !== 'string') return [];
+      
+      return value
+        .split(',')
+        .map(v => v.trim())
+        .filter(v => v.length > 0)
+        .filter((v, index, arr) => arr.indexOf(v) === index); // Remove duplicates
+    };
+
     const fetchFilterValues = async () => {
       loading.value = true;
       const filtersToFetch = availableFilters.value;
@@ -145,7 +156,30 @@ export default {
           }
 
           if (data && Array.isArray(data)) {
-            newFilterOptions[filter] = [...new Set(data.map((item) => item[filter]).filter(Boolean))];
+            // Process the data to split comma-separated values
+            const allValues = new Set();
+            
+            data.forEach(item => {
+              const value = item[filter];
+              if (value) {
+                // Split comma-separated values and add each to the set
+                const splitValues = splitAndCleanValues(value);
+                splitValues.forEach(splitValue => allValues.add(splitValue));
+              }
+            });
+
+            // Convert Set to sorted array
+            newFilterOptions[filter] = Array.from(allValues).sort((a, b) => {
+              // Try to sort numerically if possible, otherwise alphabetically
+              const numA = parseFloat(a);
+              const numB = parseFloat(b);
+              
+              if (!isNaN(numA) && !isNaN(numB)) {
+                return numA - numB;
+              }
+              
+              return a.localeCompare(b);
+            });
           } else {
             newFilterOptions[filter] = [];
           }
@@ -189,8 +223,22 @@ export default {
       });
       updateFilters();
     }
+
     function getMaxHeight(values) {
       return values.length > 8 ? '300px' : 'auto';
+    }
+
+    // Updated function to emit filters with proper database query conditions
+    function updateFilters() {
+      const activeFilters = {};
+      
+      Object.keys(selectedFilters).forEach(filter => {
+        if (selectedFilters[filter] && selectedFilters[filter].length > 0) {
+          activeFilters[filter] = selectedFilters[filter];
+        }
+      });
+
+      emit("updateFilters", activeFilters);
     }
 
     watch(() => props.productTypeId, () => {
@@ -201,8 +249,6 @@ export default {
     }, { immediate: true });
 
     onMounted(fetchFilterValues);
-
-
 
     return {
       t,
@@ -216,7 +262,8 @@ export default {
       toggleSelection,
       clearFilterSelection,
       clearAllFilters,
-      getMaxHeight
+      getMaxHeight,
+      updateFilters
     };
   },
 };
@@ -230,36 +277,9 @@ export default {
   max-height: calc(100vh - 100px);
 }
 
-/* .scrollable-list-wrapper {
-  display: flex;
-  flex-direction: column;
-  max-height: 300px;
-  overflow: hidden;
-}
-
-.filter-list {
-  overflow-y: auto;
-  flex-grow: 1;
-}
-
-  
-  .filter-panel {
-    border-bottom: 1px solid rgba(0, 0, 0, 0.12);
-  }
-  
-  :deep(.v-list-item--active) {
-    background-color: rgba(25, 118, 210, 0.1);
-  }
-  
-  :deep(.v-expansion-panel-text__wrapper) {
-    padding: 0;
-  } */
-
-
 .scrollable-filter-content {
   overflow-y: auto;
   max-height: 300px;
-  /* Fallback */
 }
 
 /* Better scrollbar styling */
@@ -282,6 +302,5 @@ export default {
 
 .filter-list {
   padding-right: 4px;
-  /* Prevent scrollbar overlap */
 }
 </style>

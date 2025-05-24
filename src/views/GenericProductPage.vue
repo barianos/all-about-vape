@@ -86,11 +86,19 @@ export default {
       Object.keys(newFilters).forEach(column => {
         const values = newFilters[column];
         if (values?.length > 0) {
-          this.userFilters.push({
-            column,
-            condition: 'in',
-            value: values
-          });
+          values.forEach(value => {
+              this.userFilters.push({
+                column,
+                condition: 'like',
+                value: `%${value}%`,
+                operator: 'or' // This tells your ProductList to use OR between these conditions
+              });
+            });
+          // this.userFilters.push({
+          //   column,
+          //   condition: 'in',
+          //   value: values
+          // });
         }
       });
     },
