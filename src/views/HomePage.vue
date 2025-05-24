@@ -5,7 +5,7 @@
     <!-- Promo Section -->
     <PromoSlider />
     <!-- Hero Section -->
-    <section class="hero">
+    <section class="hero mt-8">
       <div class="hero-content">
         <h1>Welcome to All About Vape</h1>
         <p>Where you will find anything vape related!</p>
@@ -14,7 +14,7 @@
 
 
     <!-- About Us Snippet -->
-    <section class="about-snippet">
+    <section class="about-snippet mt-8">
       <div class="container">
         <div class="about-content">
           <div class="about-image">
@@ -74,6 +74,10 @@ export default {
   padding: 0;
 }
 
+.about-snippet {
+  padding:10px;
+}
+
 .container {
   max-width: 1200px;
   margin: 0 auto;
@@ -102,6 +106,7 @@ section h2 {
   align-items: center;
   justify-content: center;
   text-align: center;
+  padding:10px;
 }
 
 .hero-content {
