@@ -52,5 +52,12 @@
   "flavor": "Flavor",
   "clear": "Αφαιρεση",
   "clear_all": "Αφαιρεση όλων",
-  "active_filters": "Ενεργά φίλτρα"
+  "active_filters": "Ενεργά φίλτρα",
+  "characteristics": "Χαρακτηριστικά",
+  "puffs": "Puffs",
+  "matterial": "Υλικό",
+  "nicotine_volume": "Ποσότητα Νικοτίνης",
+  "volt": "Volt",
+  "length": "Μήκος",
+  "weight": "Βάρος"
 }

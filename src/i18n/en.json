@@ -52,5 +52,12 @@
   "flavor": "Flavor",
   "clear": "Clear",
   "clear_all": "Clear All",
-  "active_filters": "Active Filters"
+  "active_filters": "Active Filters",
+  "characteristics": "Characteristics",
+  "puffs": "Puffs",
+  "matterial": "Material",
+  "nicotine_volume": "Nicotine Volume",
+  "volt": "Volt",
+  "length": "Length",
+  "weight": "Weight"
 }

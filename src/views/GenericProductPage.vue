@@ -60,7 +60,7 @@ export default {
   data() { 
     return {
       resolvedTypeId: null,
-      initialLoading: true,  // Only for initial type ID loading
+      initialLoading: true,
       userFilters: [],
       childLoading: false,
     };
@@ -91,14 +91,9 @@ export default {
                 column,
                 condition: 'like',
                 value: `%${value}%`,
-                operator: 'or' // This tells your ProductList to use OR between these conditions
+                operator: 'or'
               });
             });
-          // this.userFilters.push({
-          //   column,
-          //   condition: 'in',
-          //   value: values
-          // });
         }
       });
     },
