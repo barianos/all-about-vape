@@ -37,7 +37,7 @@ const routes = [
 ];
 
 const router = createRouter({
-  history: createWebHistory(process.env.NODE_ENV === 'production' ? '/all-about-vape/' : '/'),
+  history: createWebHistory('/'),
   routes,
 });
 
