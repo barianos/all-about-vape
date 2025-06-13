@@ -61,7 +61,6 @@ export default {
           .select('*');
         
         if (error) throw error
-        console.log(data);
         this.slides = data
       } catch (error) {
         console.error('Error fetching slides:', error)
