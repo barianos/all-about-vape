@@ -202,7 +202,6 @@ export default {
           console.warn('Product type mismatch!');
         }
 
-        // Build characteristics array after product is loaded
         this.buildCharacteristics();
       }
     },

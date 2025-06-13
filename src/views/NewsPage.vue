@@ -14,7 +14,7 @@
   
   <script>
   import { ref, onMounted } from 'vue';
-  import { supabase } from '../supabase'; // import the supabase client
+  import { supabase } from '../supabase';
   
   export default {
     name: 'News',

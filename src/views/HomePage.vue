@@ -23,7 +23,6 @@
           <div class="about-text">
             <h2>About Our Store</h2>
             <p>Established in 2023, our store has been providing quality vaping products to our community. We pride ourselves on exceptional customer service and carefully curated selection.</p>
-            <!-- <router-link to="/about" class="learn-more">Learn More About Us</router-link> -->
           </div>
         </div>
       </div>
