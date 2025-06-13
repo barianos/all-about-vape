@@ -15,10 +15,10 @@ const vuetify = createVuetify({
       defaultSet: 'mdi',
     },
     theme: {
-      defaultTheme: 'light', // Optional, but makes it clear that you're using Vuetify themes
+      defaultTheme: 'light',
     },
     display: {
-      mobileBreakpoint: 'sm', // Optional, sets the mobile breakpoint to 'sm'
+      mobileBreakpoint: 'sm',
     },
   });
 
