@@ -46,7 +46,7 @@
           <div class="benefit-item">
             <div class="icon">💯</div>
             <h3>Customer Satisfaction</h3>
-            <p>Your happiness is our priority</p>
+            <p>Your satisfaction is our priority</p>
           </div>
         </div>
       </div>
